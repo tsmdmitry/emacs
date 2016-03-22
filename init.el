@@ -2,18 +2,27 @@
 
 (require 'package)
 (setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-	("marmalade" . "https://marmalade-repo.org/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/")
-        ("melpa-stable" . "http://stable.melpa.org/packages/")))
+  '(("gnu" . "http://elpa.gnu.org/packages/")
+    ("marmalade" . "https://marmalade-repo.org/packages/")
+    ("melpa" . "http://melpa.milkbox.net/packages/")
+    ("melpa-stable" . "http://stable.melpa.org/packages/")))
 
 (package-initialize)
 
 (defvar local-packages
   '(
-    solarized-theme
+    aurora-theme
     elpy
     web-mode
+    neotree
+    magit
+    ;
+    rust-mode
+    racer
+    ;;
+    go-autocomplete
+    go-mode
+    rainbow-delimiters
     ))
 
 (defun uninstalled-packages (packages)
@@ -30,7 +39,7 @@
 
 ;; Настройка
 ;; ----------------------------------------------------------
-(load-theme 'solarized-dark t)
+(load-theme 'aurora t)
 (global-linum-mode t) ;; включить номера строк глобально
 (setq inhibit-startup-message t) ;; скрыть стартовое сообщение
 (setq line-number-mode t) ;; включить номера строк
@@ -88,10 +97,39 @@
 
 (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
 
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
+(setq web-mode-markup-indent-offset 4)
+(setq web-mode-code-indent-offset 4)
+(setq web-mode-css-indent-offset 4)
 
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-enable-auto-expanding t)
 (setq web-mode-enable-css-colorization t)
+
+
+;;Rust
+(setq racer-cmd "/home/dmitry/.cargo/bin/racer")
+(setq racer-rust-src-path "/home/dmitry/src/rust/src/")
+
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+
+(setq company-tooltip-align-annotations t)
+
+
+;;Golang
+(require 'go-mode)
+
+;; enable autocompletion
+(defun auto-complete-for-go ()
+  (auto-complete-mode 1))
+(add-hook 'go-mode-hook 'auto-complete-for-go)
+(with-eval-after-load 'go-mode (require 'go-autocomplete))
+
+;; enable rainbow-delimiters
+(require 'rainbow-delimiters)
+(add-hook `go-mode-hook `rainbow-delimiters-mode)
+
+;; run gofmt on save (really goimports which calls gofmt)
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook 'gofmt-before-save)
