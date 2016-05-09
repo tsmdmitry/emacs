@@ -23,6 +23,11 @@
     go-autocomplete
     go-mode
     rainbow-delimiters
+    ;;
+    inf-ruby
+    rvm
+    robe
+    yaml-mode
     ))
 
 (defun uninstalled-packages (packages)
@@ -133,3 +138,19 @@
 ;; run gofmt on save (really goimports which calls gofmt)
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+
+;; Ruby
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-mode-hook 'company-mode)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+
+; с какими файлами ассоциировать web-mode
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+; подсвечивать текущий элемент
+(setq web-mode-enable-current-element-highlight t)
+
+;; YAML
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
