@@ -12,6 +12,7 @@
 (defvar local-packages
   '(
     aurora-theme
+    arjen-grey-theme
     elpy
     web-mode
     neotree
@@ -28,6 +29,9 @@
     rvm
     robe
     yaml-mode
+    ;;
+    docker
+    dockerfile-mode
     ))
 
 (defun uninstalled-packages (packages)
@@ -44,7 +48,8 @@
 
 ;; Настройка
 ;; ----------------------------------------------------------
-(load-theme 'aurora t)
+;; (load-theme 'aurora t)
+(load-theme 'arjen-grey t)
 (global-linum-mode t) ;; включить номера строк глобально
 (setq inhibit-startup-message t) ;; скрыть стартовое сообщение
 (setq line-number-mode t) ;; включить номера строк
@@ -75,6 +80,13 @@
 
 ;; Шрифт
 (set-default-font "Ubuntu Mono-12")
+
+;; Neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+(setq neo-theme 'nerd)
+(setq neo-window-width 32) ;; ширина буфера neotree
+(setq neo-smart-open t)
 ;; ---------------------------------------------------------
 
 
@@ -154,3 +166,8 @@
 ;; YAML
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+
+;; Docker
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
