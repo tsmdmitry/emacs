@@ -87,20 +87,21 @@
 (setq neo-theme 'nerd)
 (setq neo-window-width 32) ;; ширина буфера neotree
 (setq neo-smart-open t)
+(setq neo-window-position 'right) ;; буфер neotree справа
 ;; ---------------------------------------------------------
 
 
 ;; Python
 (elpy-enable)
-(custom-set-variables
- '(elpy-modules (quote
-                 (elpy-module-company
-                  elpy-module-eldoc
-                  elpy-module-flymake
-                  elpy-module-pyvenv
-                  elpy-module-yasnippet
-                  elpy-module-sane-defaults)))
- '(elpy-rpc-backend "jedi"))
+(setq elpy-modules '(elpy-module-company
+                     elpy-module-eldoc
+                     elpy-module-flymake
+                     elpy-module-pyvenv
+                     elpy-module-yasnippet
+                     elpy-module-sane-defaults))
+
+(setq elpy-rpc-backend "jedi")
+
 
 ;; fill-column
 (add-hook 'python-mode-hook 'turn-on-auto-fill)
@@ -123,7 +124,7 @@
 (setq web-mode-enable-css-colorization t)
 
 
-;;Rust
+;; Rust
 (setq racer-cmd "/home/dmitry/.cargo/bin/racer")
 (setq racer-rust-src-path "/home/dmitry/src/rust/src/")
 
@@ -134,7 +135,7 @@
 (setq company-tooltip-align-annotations t)
 
 
-;;Golang
+;; Golang
 (require 'go-mode)
 
 ;; enable autocompletion
