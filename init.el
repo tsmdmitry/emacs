@@ -17,6 +17,7 @@
     web-mode
     neotree
     magit
+    popup-switcher
     ;
     rust-mode
     racer
@@ -54,10 +55,11 @@
 (setq inhibit-startup-message t) ;; скрыть стартовое сообщение
 (setq line-number-mode t) ;; включить номера строк
 (setq column-number-mode t) ;; включить номера столбцов
-(menu-bar-mode 1) ;; включаем графическое меню
+(menu-bar-mode -1) ;; выключаем графическое меню
 (tool-bar-mode -1) ;; выключаем tool-bar
 (scroll-bar-mode -1) ;; выключаем scroll-bar
 (setq ring-bell-function 'ignore) ;; отключить звуковой сигнал
+(global-set-key [f12] 'menu-bar-mode) ;; вкл/выкл графическое меню
 
 ;; Отключить backup/автосохранение файлов
 (setq make-backup-files nil)
@@ -88,6 +90,10 @@
 (setq neo-window-width 32) ;; ширина буфера neotree
 (setq neo-smart-open t)
 (setq neo-window-position 'right) ;; буфер neotree справа
+
+;; Popup switcher
+(require 'popup-switcher)
+(global-set-key [f2] 'psw-switch-buffer)
 ;; ---------------------------------------------------------
 
 
