@@ -18,7 +18,7 @@
     neotree
     magit
     popup-switcher
-    ;
+    ;;
     rust-mode
     racer
     ;;
@@ -60,6 +60,7 @@
 (scroll-bar-mode -1) ;; выключаем scroll-bar
 (setq ring-bell-function 'ignore) ;; отключить звуковой сигнал
 (global-set-key [f12] 'menu-bar-mode) ;; вкл/выкл графическое меню
+(delete-selection-mode t) ;; удалить выделенный текст при вводе поверх
 
 ;; Отключить backup/автосохранение файлов
 (setq make-backup-files nil)
