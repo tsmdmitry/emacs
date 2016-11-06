@@ -11,8 +11,8 @@
 
 (defvar local-packages
   '(
-    aurora-theme
     arjen-grey-theme
+    ;;
     elpy
     web-mode
     neotree
@@ -49,7 +49,6 @@
 
 ;; Настройка
 ;; ----------------------------------------------------------
-;; (load-theme 'aurora t)
 (load-theme 'arjen-grey t)
 (global-linum-mode t) ;; включить номера строк глобально
 (setq inhibit-startup-message t) ;; скрыть стартовое сообщение
@@ -82,7 +81,16 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Шрифт
-(set-default-font "Ubuntu Mono-12")
+;; (set-default-font "Ubuntu Mono-12")
+(set-default-font "Anka/Coder Condensed-12")
+
+;; Scrolling settings
+(setq scroll-step 1) ;; вверх-вниз по 1 строке
+(setq scroll-margin 1) ;; сдвигать буфер верх/вниз когда курсор в 1 шаге от верхней/нижней границы
+(setq scroll-conservatively 10000)
+
+;; Show-paren-mode settings
+(show-paren-mode t) ;; включить выделение выражений между {},[],()
 
 ;; Neotree
 (require 'neotree)
